@@ -1,6 +1,9 @@
+import './style.css';
+
 console.log('Robot Bobby was here');
 
 import * as THREE from "three";
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 const scene = new THREE.Scene();
 
@@ -16,13 +19,27 @@ const camera = new THREE.PerspectiveCamera(
     1000
 );
 
+const controls = new OrbitControls(camera, renderer.domElement);
+
+
+function animate(){
+    requestAnimationFrame(animate);
+
+    controls.update();
+
+    renderer.render(scene, camera);
+
+}
+
+animate()
+
 
 // Creating the shape
 
-const geometry = new THREE.SphereGeometry(2, 32, 32);
+const geometry = new THREE.SphereGeometry(4, 20);
 
 const material = new THREE.MeshBasicMaterial({
-    color: 0x00ff00,
+    color: 0xadd8e6,
     wireframe: true
 });
 
@@ -30,6 +47,24 @@ const sphere = new THREE.Mesh(geometry, material);
 
 scene.add(sphere);
 
-camera.position.z = 5;
+camera.position.z = 8;
 
 renderer.render(scene, camera);
+
+
+function rotate(time){
+    sphere.rotation.x = time / 1000;
+    sphere.rotation.y = time / 1000;
+    renderer.render(scene, camera);
+}
+
+renderer.setAnimationLoop(rotate);
+
+
+
+
+
+
+const gridhelper = new THREE.GridHelper(30);
+
+scene.add(gridhelper);
