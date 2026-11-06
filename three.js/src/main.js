@@ -61,10 +61,9 @@ renderer.render(scene, camera);
 // renderer.setAnimationLoop(rotate);
 
 function animate(){
-    sphere.position.x = Math.sin(Date.now() * 0.002) * 4;
+    sphere.position.x = Math.sin(Date.now() * 0.002) * 7;
     // sphere.position.y = Math.sin(Date.now() * 0.002) * 2;
     sphere.position.z = Math.sin(Date.now() * 0.002) * 2;
-
     sphere.rotation.x += 0.01;
 
     renderer.render(scene, camera);
