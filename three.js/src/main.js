@@ -22,8 +22,8 @@ const camera = new THREE.PerspectiveCamera(
 const controls = new OrbitControls(camera, renderer.domElement);
 
 
-function animate(){
-    requestAnimationFrame(animate);
+function control(){
+    requestAnimationFrame(control);
 
     controls.update();
 
@@ -31,12 +31,12 @@ function animate(){
 
 }
 
-animate()
+control()
 
 
 // Creating the shape
 
-const geometry = new THREE.SphereGeometry(4, 20);
+const geometry = new THREE.SphereGeometry(4, 30);
 
 const material = new THREE.MeshBasicMaterial({
     color: 0xadd8e6,
@@ -52,13 +52,25 @@ camera.position.z = 8;
 renderer.render(scene, camera);
 
 
-function rotate(time){
-    sphere.rotation.x = time / 1000;
-    sphere.rotation.y = time / 1000;
+// function rotate(time){
+//     sphere.rotation.x = time / 1000;
+//     sphere.rotation.y = time / 1000;
+//     renderer.render(scene, camera);
+// }
+
+// renderer.setAnimationLoop(rotate);
+
+function animate(){
+    sphere.position.x = Math.sin(Date.now() * 0.002) * 4;
+    // sphere.position.y = Math.sin(Date.now() * 0.002) * 2;
+    sphere.position.z = Math.sin(Date.now() * 0.002) * 2;
+
+    sphere.rotation.x += 0.01;
+
     renderer.render(scene, camera);
 }
 
-renderer.setAnimationLoop(rotate);
+renderer.setAnimationLoop(animate);
 
 
 
